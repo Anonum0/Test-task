@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5431:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+  data-api:
+    build:
+      context: ./data-api
+    container_name: data-api
+    environment:
+      SERVER_PORT: 8081
+      INTERNAL_TOKEN: internal-secret
+      JWT_SECRET: 694bec456748924b9c8680c9be5e33c4
+    ports:
+      - "8081:8081"
+
+  auth-api:
+    build:
+      context: ./auth-api
+    container_name: auth-api
+    environment:
+      SERVER_PORT: 8080
+
+      #POSTGRES_URL: jdbc:postgresql://localhost:5432/app_db
+      #POSTGRES_USER: user
+      #POSTGRES_PASSWORD: 1111
+      DATA_API_URL: http://data-api:8081
+      INTERNAL_TOKEN: internal-secret
+      JWT_SECRET: 694bec456748924b9c8680c9be5e33c4
+      
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - data-api
+    
+
+volumes:
+  postgres_data:

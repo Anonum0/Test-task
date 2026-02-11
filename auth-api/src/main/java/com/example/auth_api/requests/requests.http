@@ -1,0 +1,26 @@
+### Register
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+### Login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+### transform
+POST http://localhost:8080/transform
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwNjZjNzA0Mi02ZjAzLTQ1MmEtODBjNC1jMmQzNjU0NzhjNzkiLCJpYXQiOjE3NzA2NzA4NzUsImV4cCI6MTc3MDY3NDQ3NX0.7IrOGtdQ_rTw3PmJFEVbfVP-FRGbWvJMehMRNm_E5Jk
+
+{
+  "text": "Hello World!"
+}
