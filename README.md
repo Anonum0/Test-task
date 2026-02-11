@@ -8,6 +8,6 @@ docker compose up -d --build
 
 ## Endpoints
 
-POST /api/auth/register
-POST /api/auth/login
+POST /api/auth/register<br>
+POST /api/auth/login<br>
 POST /api/process
